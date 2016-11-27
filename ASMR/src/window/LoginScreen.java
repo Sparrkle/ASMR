@@ -17,6 +17,9 @@ public class LoginScreen extends JFrame implements ActionListener
 	JButton btnJoin;
 	Container ctLogin;
 
+	/*
+	 * GlitchLib을 쓰기 위한 Glitch Animation Images
+	 */
 	ImageIcon[] titleImage =
 	{
 		new ImageIcon("src/img/defaultNew.png"),
@@ -25,13 +28,18 @@ public class LoginScreen extends JFrame implements ActionListener
 		new ImageIcon("src/img/defaultNewRBGB.png"),
 		new ImageIcon("src/img/defaultGlitch.png"),
 		new ImageIcon("src/img/defaultGlitch2.png"),
+		new ImageIcon("src/img/defaultGlitch3.png"),
 		new ImageIcon("src/img/glitch1.png"),
 		new ImageIcon("src/img/glitch2.png"),
 		new ImageIcon("src/img/glitch3.png"),
 		new ImageIcon("src/img/glitch4.png"),
 		new ImageIcon("src/img/glitch5.png"),
 		new ImageIcon("src/img/glitch6.png"),
-		new ImageIcon("src/img/glitch7.png")
+		new ImageIcon("src/img/glitch7.png"),
+		new ImageIcon("src/img/glitch8.png"),
+		new ImageIcon("src/img/glitch9.png"),
+		new ImageIcon("src/img/glitch10.png"),
+		new ImageIcon("src/img/glitch11.png")
 	};
 	
 	public LoginScreen(String title)
@@ -107,7 +115,7 @@ public class LoginScreen extends JFrame implements ActionListener
 		 * Image 설정
 		 */
 		lblTitle.setIcon(titleImage[0]);
-		GlitchLib glitchEffect = new GlitchLib(titleImage, lblTitle);
+		GlitchLib glitchEffect = new GlitchLib(titleImage, lblTitle, 2500, 60, 7);
 	}
 	public void actionPerformed(ActionEvent ae)
 	{
