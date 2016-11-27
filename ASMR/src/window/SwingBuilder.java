@@ -1,13 +1,22 @@
 package window;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.border.*;
-import lib.GlitchLib;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.GridLayout;
 
-public class LoginScreen extends JFrame implements ActionListener
-{
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+public class SwingBuilder extends JFrame {
+
 	JTextField tfId;
 	JPasswordField pfPw;
 	JLabel lblId;
@@ -16,31 +25,13 @@ public class LoginScreen extends JFrame implements ActionListener
 	JButton btnReg;
 	JButton btnJoin;
 	Container ctLogin;
-
-	ImageIcon[] titleImage =
-	{
-		new ImageIcon("src/img/defaultNew.png"),
-		new ImageIcon("src/img/defaultNewGB.png"),
-		new ImageIcon("src/img/defaultNewRB.png"),
-		new ImageIcon("src/img/defaultNewRBGB.png"),
-		new ImageIcon("src/img/defaultGlitch.png"),
-		new ImageIcon("src/img/defaultGlitch2.png"),
-		new ImageIcon("src/img/glitch1.png"),
-		new ImageIcon("src/img/glitch2.png"),
-		new ImageIcon("src/img/glitch3.png"),
-		new ImageIcon("src/img/glitch4.png"),
-		new ImageIcon("src/img/glitch5.png"),
-		new ImageIcon("src/img/glitch6.png"),
-		new ImageIcon("src/img/glitch7.png")
-	};
 	
-	public LoginScreen(String title)
+	public SwingBuilder()
 	{
 		/*
 		 * 윈도우 기본 설정
 		 */
 		setResizable(false);
-		setTitle(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(720, 480);
 		ctLogin = getContentPane();
@@ -97,20 +88,6 @@ public class LoginScreen extends JFrame implements ActionListener
 		btnJoin = new JButton("Join");
 		btnJoin.setBounds(310, 375, 100, 25);
 		ctLogin.add(btnJoin);
-		
-		lblTitle = new JLabel();
-		lblTitle.setBounds(50, 50, 620, 120);
-		ctLogin.add(lblTitle);
-		
-		
-		/*
-		 * Image 설정
-		 */
-		lblTitle.setIcon(titleImage[0]);
-		GlitchLib glitchEffect = new GlitchLib(titleImage, lblTitle);
 	}
-	public void actionPerformed(ActionEvent ae)
-	{
-		
-	}
+
 }
