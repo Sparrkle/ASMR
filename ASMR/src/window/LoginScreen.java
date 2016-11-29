@@ -3,8 +3,8 @@ package window;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
-import lib.GlitchLib;
+import lib.GlitchImage;
+import lib.TextLimit;
 
 public class LoginScreen extends JFrame implements ActionListener
 {
@@ -17,9 +17,16 @@ public class LoginScreen extends JFrame implements ActionListener
 	JButton btnJoin;
 	Container ctLogin;
 
+	// ImageIcon region start
+	
 	/*
 	 * GlitchLib을 쓰기 위한 Glitch Animation Images
 	 */
+	public void paint(Graphics g)
+	{
+		super.paint(g);
+	}
+	
 	ImageIcon[] titleImage =
 	{
 		new ImageIcon("src/img/defaultNew.png"),
@@ -42,6 +49,12 @@ public class LoginScreen extends JFrame implements ActionListener
 		new ImageIcon("src/img/glitch11.png")
 	};
 	
+	ImageIcon imgId = new ImageIcon("src/img/titleId.png");
+	ImageIcon imgPw = new ImageIcon("src/img/titlePW.png");
+	ImageIcon imgTf = new ImageIcon("src/img/textField.png");
+	
+	// ImageIcon region end
+	
 	public LoginScreen(String title)
 	{
 		/*
@@ -60,42 +73,50 @@ public class LoginScreen extends JFrame implements ActionListener
 		 * 기본 UI 생성
 		 */
 		JPanel pnLogin = new JPanel();
-		pnLogin.setBounds(215,  275,  270,  90);
+		pnLogin.setBounds(180,  270,  305,  100);
+		pnLogin.setOpaque(false); //배경을 투명색으로.
 		ctLogin.add(pnLogin);
 		pnLogin.setLayout(new GridLayout(2, 1, 0, 0));
 		
 		JPanel pnLoginId = new JPanel();
 		pnLoginId.setBackground(Color.WHITE);
+		pnLoginId.setOpaque(false);
 		pnLogin.add(pnLoginId);
 		pnLoginId.setLayout(null);
 		
 		JPanel pnLoginPw = new JPanel();
 		pnLoginPw.setBackground(Color.WHITE);
+		pnLoginPw.setOpaque(false);
 		pnLogin.add(pnLoginPw);
 		pnLoginPw.setLayout(null);
 		
-		lblId = new JLabel("id :");
+		lblId = new JLabel(imgId);
 		lblId.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblId.setBounds(51, 15, 20, 15);
+		lblId.setBounds(10, 15, 100, 20);
 		pnLoginId.add(lblId);
 		
-		lblPw = new JLabel("password :");
+		lblPw = new JLabel(imgPw);
 		lblPw.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblPw.setBounds(11, 15, 65, 15);
+		lblPw.setBounds(10, 15, 100, 20);
 		pnLoginPw.add(lblPw);
 		
 		tfId = new JTextField(20);
-		tfId.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
-		tfId.setForeground(Color.BLACK);
-		tfId.setBackground(Color.WHITE);
-		tfId.setBounds(80, 7, 185, 30);
+		tfId.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+		tfId.setForeground(Color.WHITE);
+		//tfId.setBackground(new Color(0, 0, 0, 0));
+		tfId.setOpaque(false);
+		tfId.setBounds(2, 0, 185, 30);
+		tfId.setBorder(null);
+		//****현재 한글 입력하면 지워지는 오류있음 ~~~****
+		tfId.setDocument(new TextLimit(16,"[a-zA-Z0-9]"));
 		pnLoginId.add(tfId);
 		
 		pfPw = new JPasswordField(20);
-		pfPw.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
-		pfPw.setForeground(Color.BLACK);
-		pfPw.setBackground(Color.WHITE);
-		pfPw.setBounds(80, 7, 185, 30);
+		pfPw.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+		pfPw.setForeground(Color.WHITE);
+		pfPw.setOpaque(false);
+		pfPw.setBounds(2, 0, 185, 30);
+		pfPw.setBorder(null);
 		pnLoginPw.add(pfPw);
 		
 		btnReg = new JButton("Register");
@@ -115,7 +136,22 @@ public class LoginScreen extends JFrame implements ActionListener
 		 * Image 설정
 		 */
 		lblTitle.setIcon(titleImage[0]);
-		GlitchLib glitchEffect = new GlitchLib(titleImage, lblTitle, 2500, 60, 7);
+		GlitchImage glitchEffect = new GlitchImage(titleImage, lblTitle, 2500, 60, 6);
+		glitchEffect.start();
+		
+		/*
+		 * TextField의 배경 이미지를 따로 설정할 수가 없어서... label에 imageIcon을 넣은 후
+		 * TextField를 label에 add했다. 물론 label은 위에서 투명화 시켜놓았음!
+		 */
+		JLabel lblImageTfId = new JLabel(imgTf);
+		lblImageTfId.setBounds(117, 10, 183, 30);
+		pnLoginId.add(lblImageTfId);
+		lblImageTfId.add(tfId);
+		
+		JLabel lblImageTfPw = new JLabel(imgTf);
+		lblImageTfPw.setBounds(117, 10, 183, 30);
+		pnLoginPw.add(lblImageTfPw);
+		lblImageTfPw.add(pfPw);
 	}
 	public void actionPerformed(ActionEvent ae)
 	{
