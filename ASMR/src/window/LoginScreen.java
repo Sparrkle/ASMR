@@ -107,8 +107,7 @@ public class LoginScreen extends JFrame implements ActionListener
 		tfId.setOpaque(false);
 		tfId.setBounds(2, 0, 185, 30);
 		tfId.setBorder(null);
-		//****현재 한글 입력하면 지워지는 오류있음 ~~~****
-		tfId.setDocument(new TextLimit(16,"[a-zA-Z0-9]"));
+		tfId.addKeyListener(new TextLimit(tfId, 16,"[a-zA-Z0-9!@#$%^*+=-]"));
 		pnLoginId.add(tfId);
 		
 		pfPw = new JPasswordField(20);
@@ -117,6 +116,7 @@ public class LoginScreen extends JFrame implements ActionListener
 		pfPw.setOpaque(false);
 		pfPw.setBounds(2, 0, 185, 30);
 		pfPw.setBorder(null);
+		pfPw.addKeyListener(new TextLimit(pfPw, 20));
 		pnLoginPw.add(pfPw);
 		
 		btnReg = new JButton("Register");
@@ -153,6 +153,7 @@ public class LoginScreen extends JFrame implements ActionListener
 		pnLoginPw.add(lblImageTfPw);
 		lblImageTfPw.add(pfPw);
 	}
+	
 	public void actionPerformed(ActionEvent ae)
 	{
 		
