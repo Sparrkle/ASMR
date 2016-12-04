@@ -1,6 +1,7 @@
 package lib.code;
 
-import lib.StageLib;
+import stage.StageLib;
+import lib.code.*;
 
 
 public class CodeManager

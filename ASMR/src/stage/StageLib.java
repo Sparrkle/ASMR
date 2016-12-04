@@ -1,10 +1,10 @@
-package lib;
+package stage;
 
 import java.lang.reflect.*;
 
 /*
  * Stage의 동적 함수 실행을 위한 클래스.
- * stageNum에 1이 들어오면 stage.Stage1.class를 load하고 return 할 수 있다.
+ * stageNum에 1이 들어오면 stage.stageList.Stage1를 load하고 return 할 수 있다.
  * 
  * 아래는 예시.
  * 
@@ -32,7 +32,7 @@ public class StageLib
 	{
 		try
 		{
-			stageClass = Class.forName("stage.Stage"+stageNum);
+			stageClass = Class.forName("stage.stageList.Stage"+stageNum);
 			obj = stageClass.newInstance();
 			
 			getDesMethod = obj.getClass().getMethod("getDescription");
