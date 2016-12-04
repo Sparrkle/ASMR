@@ -102,12 +102,11 @@ public class LoginScreen extends JFrame implements ActionListener
 		
 		tfId = new JTextField(20);
 		tfId.setFont(new Font("맑은 고딕", Font.PLAIN, 17));
-		tfId.setForeground(Color.WHITE);
-		//tfId.setBackground(new Color(0, 0, 0, 0));
+		tfId.setForeground(Color.WHITE); // 글자색 지정
 		tfId.setOpaque(false);
 		tfId.setBounds(2, 0, 185, 30);
-		tfId.setBorder(null);
-		tfId.addKeyListener(new TextLimit(tfId, 16,"[a-zA-Z0-9!@#$%^*+=-]"));
+		tfId.setBorder(null);	 //테두리는 안보이게
+		tfId.addKeyListener(new TextLimit(tfId, 16,"[a-zA-Z0-9_-]"));
 		pnLoginId.add(tfId);
 		
 		pfPw = new JPasswordField(20);
@@ -116,12 +115,13 @@ public class LoginScreen extends JFrame implements ActionListener
 		pfPw.setOpaque(false);
 		pfPw.setBounds(2, 0, 185, 30);
 		pfPw.setBorder(null);
-		pfPw.addKeyListener(new TextLimit(pfPw, 20));
+		pfPw.addKeyListener(new TextLimit(pfPw, 20, "[a-zA-Z0-9!@#$%^&*()+=-_`~]"));
 		pnLoginPw.add(pfPw);
 		
 		btnReg = new JButton("Register");
 		btnReg.setBounds(310, 405, 100, 25);
 		ctLogin.add(btnReg);
+		btnReg.addActionListener(this);
 		
 		btnJoin = new JButton("Join");
 		btnJoin.setBounds(310, 375, 100, 25);
@@ -156,6 +156,11 @@ public class LoginScreen extends JFrame implements ActionListener
 	
 	public void actionPerformed(ActionEvent ae)
 	{
-		
+		if(ae.getActionCommand() == "Register")
+		{
+		}
+		else if(ae.getActionCommand() == "Join")
+		{
+		}
 	}
 }

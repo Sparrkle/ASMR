@@ -9,6 +9,7 @@ import javax.swing.text.*;
  * JTextComponent들의 글자 수 제한과 패턴으로 한글같은걸 입력받지 못하게 하는 클래스
  * 크.. 만능 클래스 지렸습니다
  */
+
 public class TextLimit implements KeyListener
 {
 	private JTextComponent tcOrigin;
@@ -41,14 +42,14 @@ public class TextLimit implements KeyListener
 	@Override
 	public void keyTyped(KeyEvent ke)
 	{
-		String c = Character.toString(ke.getKeyChar());
+		String str = Character.toString(ke.getKeyChar());
 		
 		try
 		{
 			if(pattern != "")
 			{
 				Pattern p = Pattern.compile(pattern);
-				Matcher m = p.matcher(c);
+				Matcher m = p.matcher(str);
 			
 				if(!m.matches())
 					ke.setKeyChar('\0');
