@@ -1,7 +1,5 @@
 package lib.code.instruction;
 
-import java.util.List;
-
 import lib.code.CodeObject;
 import lib.variable.VariableManager;
 import lib.variable.exception.InvalidArraySizeException;

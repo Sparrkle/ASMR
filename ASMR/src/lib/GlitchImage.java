@@ -77,8 +77,6 @@ public class GlitchImage extends TimerTask
 	
 	void glitchEffect()
 	{
-		Random effectRandom = new Random();
-
 		lblTarget.setIcon(glitchImage[randomize[count]]);
 	}
 	

@@ -2,7 +2,6 @@ package stage.stageList;
 
 import stage.StageObject;
 import stage.StageInterface;
-import lib.variable.VariableManager;
 
 public class Stage1 extends StageObject implements StageInterface
 {
