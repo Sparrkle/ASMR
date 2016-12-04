@@ -8,6 +8,7 @@ public class VariableManager
 	List<Object> arrOutput;
 	String[] arrVar;
 	String cpu;
+	String test;
 	
 	public VariableManager(int arrAmount)
 	{
