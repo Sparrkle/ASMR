@@ -1,8 +1,8 @@
 package lib.code.instruction;
 
 import lib.code.CodeObject;
+import lib.exception.InvalidValueException;
 import lib.variable.VariableManager;
-import lib.variable.exception.InvalidValueException;
 
 public class PrintData extends CodeObject
 {

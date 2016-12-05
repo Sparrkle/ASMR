@@ -1,4 +1,4 @@
-package lib.variable.exception;
+package lib.exception;
 
 public class InvalidValueException extends Exception
 {

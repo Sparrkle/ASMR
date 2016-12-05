@@ -5,7 +5,9 @@ package lib.variable;
  */
 
 import java.util.*;
-import lib.variable.exception.*;
+
+import lib.exception.InvalidArraySizeException;
+import lib.exception.InvalidValueException;
 
 public class VariableManager
 {

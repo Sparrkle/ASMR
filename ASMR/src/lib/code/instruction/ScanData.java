@@ -1,8 +1,8 @@
 package lib.code.instruction;
 
 import lib.code.CodeObject;
+import lib.exception.InvalidArraySizeException;
 import lib.variable.VariableManager;
-import lib.variable.exception.InvalidArraySizeException;
 
 public class ScanData extends CodeObject
 {
