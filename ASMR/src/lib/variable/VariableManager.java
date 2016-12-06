@@ -45,7 +45,7 @@ public class VariableManager
 			return temp;
 		}
 		else
-			throw new InvalidArraySizeException("arrInput size is 0");
+			throw new InvalidArraySizeException("withdrawInput - arrInput size is 0");
 	}
 	
 	public List<Object> depositOutput(Object input)
@@ -61,10 +61,32 @@ public class VariableManager
 			if(arrVar[num] != null)
 				return arrVar[num];
 			else
-				throw new InvalidValueException("invalid value to arrVar : " + num);
+				throw new InvalidValueException("getVariable - invalid value to arrVar : " + num);
 		}
 		else
-			throw new InvalidArraySizeException("invalid get arrVar : " + num);
+			throw new InvalidArraySizeException("getVariable - invalid get arrVar : " + num);
+	}
+	
+	public String getVariableAtPointer(int num) throws InvalidArraySizeException, InvalidValueException, NumberFormatException
+	{
+		String targetAddress = "";
+		try
+		{
+			targetAddress = getVariable(num);
+			return getVariable(Integer.parseInt(targetAddress));
+		}
+		catch(InvalidArraySizeException e)
+		{
+			throw new InvalidArraySizeException(e.getMessage());
+		}
+		catch(InvalidValueException e)
+		{
+			throw new InvalidValueException(e.getMessage());
+		}
+		catch(NumberFormatException e)
+		{
+			throw new NumberFormatException("getVariableAtPointer - invalid operand : " + targetAddress);
+		}
 	}
 	
 	public void setVariable(String input, int num) throws InvalidArraySizeException
@@ -72,7 +94,7 @@ public class VariableManager
 		if(num >= 0 && num < arrVar.length)
 			arrVar[num] = input;
 		else
-			throw new InvalidArraySizeException("invalid set arrVar : " + num);
+			throw new InvalidArraySizeException("setVariable - invalid set arrVar : " + num);
 	}
 	
 	public String getCpu() throws InvalidValueException
@@ -80,7 +102,7 @@ public class VariableManager
 		if(cpu != null)
 			return cpu;
 		else
-			throw new InvalidValueException("invalid value to cpu");
+			throw new InvalidValueException("getCpu - invalid value to cpu");
 	}
 	
 	public void setCpu(String input)

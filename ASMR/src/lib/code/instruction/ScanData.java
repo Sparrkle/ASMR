@@ -1,5 +1,6 @@
 package lib.code.instruction;
 
+import javax.swing.JLabel;
 import lib.code.CodeObject;
 import lib.exception.InvalidArraySizeException;
 import lib.variable.VariableManager;
