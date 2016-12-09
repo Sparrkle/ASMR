@@ -8,7 +8,7 @@ import javax.swing.*;
 import lib.GlitchImage;
 import lib.TextLimit;
 
-public class LoginScreen extends JFrame implements ActionListener
+public class LoginScreen extends JPanel implements ActionListener
 {
 	JTextField tfId;
 	JPasswordField pfPw;
@@ -17,17 +17,12 @@ public class LoginScreen extends JFrame implements ActionListener
 	JLabel lblTitle;
 	JButton btnReg;
 	JButton btnJoin;
-	Container ctLogin;
 
 	// ImageIcon region start
 	
 	/*
 	 * GlitchLib을 쓰기 위한 Glitch Animation Images
 	 */
-	public void paint(Graphics g)
-	{
-		super.paint(g);
-	}
 	
 	ImageIcon[] titleImage =
 	{
@@ -58,26 +53,19 @@ public class LoginScreen extends JFrame implements ActionListener
 	// ImageIcon region end
 	
 	public LoginScreen(String title)
-	{
-		/*
-		 * 윈도우 기본 설정
-		 */
-		setResizable(false);
-		setTitle(title);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(720, 480);
-		ctLogin = getContentPane();
-		ctLogin.setBackground(Color.BLACK);
-		ctLogin.setLayout(null); // 위치 직접 지정할꺼에여..
-		
-		
+	{	
 		/*
 		 * 기본 UI 생성
 		 */
+		this.setBounds(0, 0, 720, 480);
+		this.setVisible(true);
+		this.setLayout(null);
+		this.setBackground(Color.BLACK);
+		
 		JPanel pnLogin = new JPanel();
 		pnLogin.setBounds(180,  270,  305,  100);
 		pnLogin.setOpaque(false); //배경을 투명색으로.
-		ctLogin.add(pnLogin);
+		this.add(pnLogin);
 		pnLogin.setLayout(new GridLayout(2, 1, 0, 0));
 		
 		JPanel pnLoginId = new JPanel();
@@ -122,16 +110,16 @@ public class LoginScreen extends JFrame implements ActionListener
 		
 		btnReg = new JButton("Register");
 		btnReg.setBounds(310, 405, 100, 25);
-		ctLogin.add(btnReg);
+		this.add(btnReg);
 		btnReg.addActionListener(this);
 		
 		btnJoin = new JButton("Join");
 		btnJoin.setBounds(310, 375, 100, 25);
-		ctLogin.add(btnJoin);
+		this.add(btnJoin);
 		
 		lblTitle = new JLabel();
 		lblTitle.setBounds(50, 50, 620, 120);
-		ctLogin.add(lblTitle);
+		this.add(lblTitle);
 		
 		
 		/*

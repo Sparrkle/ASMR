@@ -9,10 +9,26 @@ public class PrintData extends CodeObject
 {
 	VariableManager vm;
 	
-	public PrintData(VariableManager vmInput)
+	public PrintData(boolean defaultObjectInput, VariableManager vmInput)
 	{
+		super.setDefaultObject(defaultObjectInput);
 		this.setName("printData");
 		vm = vmInput;
+	}
+	
+	@Override
+	public PrintData copy()
+	{
+		PrintData copyObj = null;
+		try
+		{
+			copyObj = (PrintData) super.clone();
+		}
+		catch(CloneNotSupportedException cnse){};
+		
+		copyObj.vm = this.vm;
+		
+		return copyObj;
 	}
 	
 	@Override

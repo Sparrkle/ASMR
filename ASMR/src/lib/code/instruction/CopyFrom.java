@@ -13,12 +13,31 @@ public class CopyFrom extends CodeObject
 	boolean availablePointer = false;
 	boolean checkedPointer = false;
 
-	public CopyFrom(VariableManager vmInput, int inputOperand, boolean inputAvailablePointer)
+	public CopyFrom(boolean defaultObjectInput, VariableManager vmInput, int inputOperand, boolean inputAvailablePointer)
 	{
+		super.setDefaultObject(defaultObjectInput);
 		this.setName("copyFrom");
 		this.setTargetOperand(inputOperand);
 		this.availablePointer = inputAvailablePointer;
 		vm = vmInput;
+	}
+	
+	@Override
+	public CopyFrom copy()
+	{
+		CopyFrom copyObj = null;
+		try
+		{
+			copyObj = (CopyFrom) super.clone();
+		}
+		catch(CloneNotSupportedException cnse){};
+		
+		copyObj.vm = this.vm;
+		copyObj.targetOperand = this.targetOperand;
+		copyObj.availablePointer = this.availablePointer;
+		copyObj.checkedPointer = this.checkedPointer;
+		
+		return copyObj;
 	}
 	
 	@Override

@@ -4,9 +4,10 @@ import javax.swing.JLabel;
 
 import lib.exception.NotOverrideEssentialMethodException;
 
-public class CodeObject
+public class CodeObject implements Cloneable
 {
-	private String name;
+	private String name = null;
+	private boolean defaultObject = false;
 	
 	public JLabel[] lblOperand = new JLabel[3];
 	
@@ -22,6 +23,12 @@ public class CodeObject
 	public void run() throws Exception
 	{
 		// 오버라이딩 하세용
+	}
+	
+	public CodeObject copy()
+	{
+		// 이것도 오버라이딩
+		return null;
 	}
 	
 	public void setFirstOperand(String input)
@@ -147,6 +154,16 @@ public class CodeObject
 	{
 		// Code-window에서 Destination 주소를 저장하는 메소드에용
 		// 필요할 때 오버라이딩 하세용
+	}
+	
+	public boolean getDefaultObject()
+	{
+		return defaultObject;
+	}
+	
+	public void setDefaultObject(boolean input)
+	{
+		defaultObject = input;
 	}
 	
 	public String getName()
