@@ -1,8 +1,10 @@
-package lib.code;
+package lib.code.renderer;
 
 import java.awt.*;
 
 import javax.swing.*;
+
+import lib.code.CodeObject;
 
 public class CodeSourceRenderer extends JLabel implements ListCellRenderer
 {

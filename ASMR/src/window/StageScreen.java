@@ -1,5 +1,6 @@
 package window;
 
-public class StageScreen {
-
+public class StageScreen
+{
+	
 }

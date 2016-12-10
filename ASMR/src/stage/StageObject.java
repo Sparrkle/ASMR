@@ -30,6 +30,8 @@ public class StageObject
 	}
 	public void setArrayAmount(int input)
 	{
+		if(input > 12)
+			input = 12;
 		arrayAmount = input;
 	}
 	public void setAvailableCommand(int input)

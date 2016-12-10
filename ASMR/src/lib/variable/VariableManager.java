@@ -11,28 +11,49 @@ import lib.exception.InvalidValueException;
 
 public class VariableManager
 {
-	List<Object> arrInput;
-	List<Object> arrOutput;
+	List<String> arrInput;
+	List<String> arrOutput;
 	String[] arrVar;
 	String cpu;
-	String test;
+	VariablePanel vp;
 	
-	public VariableManager(int arrAmount)
+	public VariableManager(int arrAmount, VariablePanel vpInput)
 	{
-		arrInput = new ArrayList<Object>();
-		arrOutput = new ArrayList<Object>();
+		vp = vpInput;
+		arrInput = new ArrayList<String>();
+		arrOutput = new ArrayList<String>();
 		arrVar = new String[arrAmount];
 		cpu = new String();
 	}
 	
-	public List<Object> getArrInput()
+	public List<String> getArrInput()
 	{
 		return arrInput;
 	}
 	
-	public List<Object> getArrOutput()
+	public List<String> getArrOutput()
 	{
 		return arrOutput;
+	}
+	
+	public void reprintInput()
+	{
+		String temp = "";
+		for(int i=0; i<arrInput.size(); i++)
+		{
+			temp += (String) arrInput.get(i);
+		}
+		vp.lblInput.setText(temp);
+	}
+	
+	public void reprintOutput()
+	{
+		String temp = "";
+		for(int i=0; i<arrInput.size(); i++)
+		{
+			temp += (String) arrOutput.get(i);
+		}
+		vp.lblOutput.setText(temp);
 	}
 	
 	public String withdrawInput() throws InvalidArraySizeException
@@ -42,15 +63,17 @@ public class VariableManager
 			String temp;
 			temp = (String) arrInput.get(0);
 			arrInput.remove(0);
+			reprintInput();
 			return temp;
 		}
 		else
 			throw new InvalidArraySizeException("withdrawInput - arrInput size is 0");
 	}
 	
-	public List<Object> depositOutput(Object input)
+	public List<String> depositOutput(String input)
 	{
 		arrOutput.add(0, input);
+		reprintOutput();
 		return arrOutput;
 	}
 	
@@ -92,7 +115,10 @@ public class VariableManager
 	public void setVariable(String input, int num) throws InvalidArraySizeException
 	{
 		if(num >= 0 && num < arrVar.length)
+		{
 			arrVar[num] = input;
+			vp.btnVariable[num].setText(arrVar[num]);
+		}
 		else
 			throw new InvalidArraySizeException("setVariable - invalid set arrVar : " + num);
 	}
@@ -108,5 +134,6 @@ public class VariableManager
 	public void setCpu(String input)
 	{
 		cpu = input;
+		vp.btnCpu.setText(cpu);
 	}
 }

@@ -1,16 +1,24 @@
 package lib.code;
 
-import stage.StageLib;
-//import lib.code.*;
+import javax.swing.*;
 
 public class CodeManager implements CodeConstants
 {
 	int programCounter = 0;
+	JList<CodeObject> listCode;
 	
-	StageLib stage;
-	
-	public CodeManager(StageLib stageInput)
+	public CodeManager(JList<CodeObject> listCodeInput)
 	{
-		stage = stageInput;
+		listCode = listCodeInput;
+	}
+	
+	public int getProgramCounter()
+	{
+		return programCounter;
+	}
+	
+	public void setProgramCounter(int input)
+	{
+		programCounter = input;
 	}
 }

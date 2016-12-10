@@ -1,6 +1,5 @@
 package lib.code.instruction;
 
-import javax.swing.*;
 import lib.code.CodeObject;
 import lib.exception.InvalidValueException;
 import lib.variable.VariableManager;

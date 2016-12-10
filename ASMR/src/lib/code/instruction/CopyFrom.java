@@ -3,7 +3,6 @@ package lib.code.instruction;
 import lib.code.CodeObject;
 import lib.exception.InvalidArraySizeException;
 import lib.exception.InvalidValueException;
-import lib.exception.NotOverrideEssentialMethodException;
 import lib.variable.VariableManager;
 
 public class CopyFrom extends CodeObject
@@ -68,7 +67,6 @@ public class CopyFrom extends CodeObject
 	public void setTargetOperand(int operand)
 	{
 		targetOperand = operand;
-		this.setFirstOperand(Integer.toString(targetOperand));
 	}
 	
 	@Override

@@ -1,28 +1,30 @@
-package lib.code;
-
-import java.awt.Font;
-import java.awt.Rectangle;
+package lib.code.panel;
 
 import javax.swing.*;
 
 import lib.code.CodeConstants;
-import lib.code.CodePanel.CodeListHandler;
-import lib.code.instruction.*;
+import lib.code.CodeCreateDefaultObject;
+import lib.code.CodeObject;
+import lib.code.listener.CodeCentreMouseListener;
+import lib.code.panel.CodePanel.CodeListHandler;
+import lib.code.renderer.CodeSourceRenderer;
 import lib.variable.VariableManager;
 
 public class CodeSourcePanel extends JPanel implements CodeConstants
 {
+	CodePanel codePanel;
 	CodeCreateDefaultObject objCreateCode;
 	int availableCommand;
 	JList<CodeObject> listCode;
 	DefaultListModel<CodeObject> listModelCode;
 	CodeListHandler lh;
-	
-	public CodeSourcePanel(int x, int y, int w, int heightDefault, int heightSize, int avCmInput, VariableManager vmInput, boolean availablePointer, CodeListHandler lh2)
+
+	public CodeSourcePanel(int x, int y, int w, int heightDefault, int heightSize, int avCmInput, VariableManager vmInput, boolean availablePointer, CodeListHandler lhInput, CodePanel codePanelInput)
 	{
-		lh = lh2;
-		objCreateCode = new CodeCreateDefaultObject(vmInput, availablePointer);
-		availableCommand = (1<<avCmInput)-1;
+		codePanel = codePanelInput;
+		lh = lhInput;
+		objCreateCode = new CodeCreateDefaultObject(codePanel.cm, vmInput, availablePointer);
+		availableCommand = avCmInput;
 
 		int temp = 0;
 		
@@ -47,12 +49,17 @@ public class CodeSourcePanel extends JPanel implements CodeConstants
 		listCode.setDragEnabled(true);
 		listCode.setFixedCellHeight(heightSize);
 		listCode.setTransferHandler(lh);
-		//listCode.addMouseListener(this);
+		listCode.addMouseListener(new CodeCentreMouseListener(codePanel));
 		this.add(listCode);
 		
 		listModelCode = new DefaultListModel<CodeObject>();
 		listCode.setModel(listModelCode);
 		createCodeElement();
+	}
+	
+	public void clear()
+	{
+		listCode.clearSelection();
 	}
 	
 	public void createCodeElement()
@@ -64,6 +71,8 @@ public class CodeSourcePanel extends JPanel implements CodeConstants
 			listModelCode.addElement(objCreateCode.createPrintData());
 		if(isDataAvailableCommand(availableCommand, CODE_COPYFROM))
 			listModelCode.addElement(objCreateCode.createCopyFrom());
+		if(isDataAvailableCommand(availableCommand, CODE_JUMP))
+			listModelCode.addElement(objCreateCode.createJump());
 	}
 	
 	public boolean isDataAvailableCommand(int avCo, int input)

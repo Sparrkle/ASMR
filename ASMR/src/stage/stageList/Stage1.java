@@ -2,20 +2,27 @@ package stage.stageList;
 
 import stage.StageObject;
 import stage.StageInterface;
+import lib.code.CodeConstants;
 
 public class Stage1 extends StageObject implements StageInterface
 {
 	public Stage1()
 	{
 		super.setDescription(
-				"테스트"
-				+ "1"
-				+ "2"
-				+ "3"
+				"테스트\n"
+				+ "1\n"
+				+ "2\n"
+				+ "3\n"
 		);
-		super.setArrayAmount(1);
-		super.setAvailableCommand(0);
-		super.setAvailablePointer(false);
+		super.setArrayAmount(12);
+		super.setAvailableCommand
+		(
+				CodeConstants.CODE_SCANDATA +
+				CodeConstants.CODE_PRINTDATA +
+				CodeConstants.CODE_COPYFROM +
+				CodeConstants.CODE_JUMP
+		);
+		super.setAvailablePointer(true);
 	}
 	
 	public int[] getOutputToInput(int[] input)

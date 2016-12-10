@@ -26,6 +26,7 @@ public class StageLib
 	Method getDesMethod = null;
 	Method getArrMethod = null;
 	Method getAvCoMethod = null;
+	Method getAvPoMethod = null;
 	Method getOutMethod = null;
 	
 	public StageLib(int stageNum)
@@ -38,6 +39,7 @@ public class StageLib
 			getDesMethod = obj.getClass().getMethod("getDescription");
 			getArrMethod = obj.getClass().getMethod("getArrayAmount");
 			getAvCoMethod = obj.getClass().getMethod("getAvailableCommand");
+			getAvPoMethod = obj.getClass().getMethod("getAvailablePointer");
 			getOutMethod = obj.getClass().getMethod("getOutputToInput", new Class[]{int[].class});
 			
 			System.out.println("Success load stage" + stageNum);
@@ -130,6 +132,30 @@ public class StageLib
 			}
 		}
 		throw new Exception("getAvCoMethod is null");
+	}
+	
+	public boolean getAvailablePointer() throws Exception
+	{
+		if(getAvCoMethod != null)
+		{
+			try
+			{
+				return (boolean) getAvPoMethod.invoke(obj);
+			}
+			catch(IllegalAccessException iae)
+			{
+				System.err.println("** cannot access method : " + iae.getMessage());
+			}
+			catch(IllegalArgumentException iae)
+			{
+				System.err.println("** argument error to method : " + iae.getMessage());
+			}
+			catch(InvocationTargetException ite)
+			{
+				System.err.println("** invocation target to method : " + ite.getMessage());
+			}
+		}
+		throw new Exception("getAvPoMethod is null");
 	}
 	
 	public int[] getOutputToInput(int[] input) throws Exception
