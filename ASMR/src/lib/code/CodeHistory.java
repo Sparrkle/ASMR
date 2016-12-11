@@ -1,86 +1,84 @@
 package lib.code;
 
-import javax.swing.*;
+import java.util.*;
 
 public class CodeHistory
 {
-	JList<JList<String>> hisInput;
-	JList<JList<String>> hisOutput;
-	JList<JList<String>> hisVariable;
-	JList<String> hisCpu;
-	JList<Integer> hisProgramCounter;
+	ArrayList<List<String>> hisInput;
+	ArrayList<List<String>> hisOutput;
+	List<String[]> hisVariable;
+	List<String> hisCpu;
+	List<Integer> hisProgramCounter;
 	
-	DefaultListModel<JList<String>> modelInput;
-	DefaultListModel<JList<String>> modelOutput;
-	DefaultListModel<JList<String>> modelVariable;
-	DefaultListModel<String> modelCpu;
-	DefaultListModel<Integer> modelProgramCounter;
-	
-	int anchor;
+	int anchor = 0;
 	
 	public CodeHistory()
 	{
-		hisInput = new JList<JList<String>>();
-		hisOutput = new JList<JList<String>>();
-		hisVariable = new JList<JList<String>>();
-		hisCpu = new JList<String>();
-		hisProgramCounter = new JList<Integer>();
-		
-		modelInput = new DefaultListModel<JList<String>>();
-		modelOutput = new DefaultListModel<JList<String>>();
-		modelVariable = new DefaultListModel<JList<String>>();
-		modelCpu = new DefaultListModel<String>();
-		modelProgramCounter = new DefaultListModel<Integer>();
-		
-		hisInput.setModel(modelInput);
-		hisOutput.setModel(modelOutput);
-		hisVariable.setModel(modelVariable);
-		hisCpu.setModel(modelCpu);
-		hisProgramCounter.setModel(modelProgramCounter);
-		
-		anchor = 0;
+		hisInput = new ArrayList<List<String>>();
+		hisOutput = new ArrayList<List<String>>();
+		hisVariable = new ArrayList<String[]>();
+		hisCpu = new ArrayList<String>();
+		hisProgramCounter = new ArrayList<Integer>();
 	}
 	
-	public void setCodeHistory(JList<String> inputInp, JList<String> outputInp, JList<String> varInp, String cpuInp, int pcInp)
+	public void setCodeHistory(List<String> inputInp, List<String> outputInp, String[] varInp, String cpuInp, int pcInp)
 	{
-		modelInput.add(anchor, inputInp);
-		modelOutput.add(anchor, outputInp);
-		modelVariable.add(anchor, varInp);
-		modelCpu.add(anchor, cpuInp);
-		modelProgramCounter.add(anchor, pcInp);
+		hisInput.add(inputInp);
+		hisOutput.add(outputInp);
+		hisVariable.add(varInp);
+		hisCpu.add(cpuInp);
+		hisProgramCounter.add(pcInp);
 		
 		anchor += 1;
 	}
 	
-	public JList<Object> getCodeHistory()
+	public List<String> getHisInput()
 	{
-		if(anchor > 0)
-		{
-			anchor -= 1;
-			
-			JList<Object> temp = new JList<Object>();
-			DefaultListModel<Object> modelTemp = new DefaultListModel<Object>();		
-			temp.setModel(modelTemp);
-			
-			modelTemp.addElement(modelInput.getElementAt(anchor));
-			modelTemp.addElement(modelOutput.getElementAt(anchor));
-			modelTemp.addElement(modelVariable.getElementAt(anchor));
-			modelTemp.addElement(modelCpu.getElementAt(anchor));
-			modelTemp.addElement(modelProgramCounter.getElementAt(anchor));
-
-			return temp;
-		}
-		else
-			return null;
+		List<String> temp = hisInput.get(anchor);
+		hisInput.remove(anchor);
+		return temp;
+	}
+	
+	public List<String> getHisOutput()
+	{
+		List<String> temp = hisOutput.get(anchor);
+		hisOutput.remove(anchor);
+		return temp;
+	}
+	
+	public String[] getHisVariable()
+	{
+		String[] temp = hisVariable.get(anchor);
+		hisVariable.remove(anchor);
+		return temp;
+	}
+	
+	public String getHisCpu()
+	{
+		String temp = hisCpu.get(anchor);
+		hisCpu.remove(anchor);
+		return temp;
+	}
+	
+	public int getHisProgramCounter()
+	{
+		int temp = hisProgramCounter.get(anchor);
+		hisProgramCounter.remove(anchor);
+		return temp;
+	}
+	
+	public void decAnchor()
+	{
+		anchor--;
 	}
 	
 	public void clear()
 	{
-		hisInput.removeAll();
-		hisOutput.removeAll();
-		hisVariable.removeAll();
-		hisCpu.removeAll();
-		hisProgramCounter.removeAll();
+		hisInput.removeAll(hisInput);
+		hisOutput.removeAll(hisOutput);
+		hisVariable.removeAll(hisVariable);
+		hisCpu.removeAll(hisCpu);
+		hisProgramCounter.removeAll(hisProgramCounter);
 		
 		anchor = 0;
 	}

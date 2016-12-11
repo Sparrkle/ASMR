@@ -17,16 +17,22 @@ public class CodeRenderer extends DefaultListCellRenderer
 		pnCode.setOpaque(true);
 		pnCode.setLayout(new FlowLayout(FlowLayout.LEFT));
 		
-		if(isSelected)
+		if(list.isEnabled() == true)
 		{
-			pnCode.setBackground(list.getSelectionBackground());
-			pnCode.setForeground(list.getSelectionForeground());
+			if(isSelected)
+				pnCode.setBackground(new Color(74,97,117));
+			else
+				pnCode.setBackground(Color.black);
 		}
 		else
 		{
-			pnCode.setBackground(list.getBackground());
-			pnCode.setForeground(list.getForeground());
+			if(isSelected)
+				pnCode.setBackground(new Color(74,97,117));
+			else
+				pnCode.setBackground(Color.black);
 		}
+		pnCode.setForeground(Color.white);
+		list.setBackground(Color.black);
 		
 		JLabel[] arrLabel = new JLabel[4];
 		int i;
@@ -45,7 +51,7 @@ public class CodeRenderer extends DefaultListCellRenderer
 		if(comp != null)
 			arrLabel[1].setText(entry.getCompareOperand());
 		else
-			arrLabel[1].setVisible(false);
+			arrLabel[1].setText("");
 		
 		if(target >= 0)
 		{
@@ -55,12 +61,12 @@ public class CodeRenderer extends DefaultListCellRenderer
 				arrLabel[2].setText(Integer.toString(entry.getTargetOperand()));
 		}
 		else
-			arrLabel[2].setVisible(false);
+			arrLabel[2].setText("");
 		
 		if(dest >= 0)
 			arrLabel[3].setText(Integer.toString(entry.getDestinationAddr()));
 		else
-			arrLabel[3].setVisible(false);
+			arrLabel[3].setText("");
 
 		for(i=0; i<=3; i++)
 		{

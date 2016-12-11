@@ -22,7 +22,21 @@ public class CodeModifyOperandMouseListener extends MouseAdapter
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
-		if(operandNumber == 2)
+		if(operandNumber == 1)
+		{
+			if(codeModifyPanel.getCheckModifyOperand() == true)
+			{
+				if(codeModifyPanel.pnOperand[operandNumber-1].getBackground() != Color.orange)
+					codeModifyPanel.changeDefaultOperandButton();
+				else
+					compareEvent();
+			}
+			else
+			{
+				compareEvent();
+			}
+		}
+		else if(operandNumber == 2)
 		{
 			if(SwingUtilities.isLeftMouseButton(e))
 			{
@@ -60,4 +74,22 @@ public class CodeModifyOperandMouseListener extends MouseAdapter
 		}
 		codeModifyPanel.setSelectedOperand(operandNumber);
     }
+	
+	public void compareEvent()
+	{
+		CodeObject targetCode = codeModifyPanel.getTargetCode();
+		String compare = targetCode.getCompareOperand(); 
+		if(compare.equals(">="))
+			targetCode.setCompareOperand(">");
+		else if(compare.equals(">"))
+			targetCode.setCompareOperand("==");
+		else if(compare.equals("=="))
+			targetCode.setCompareOperand("<");
+		else if(compare.equals("<"))
+			targetCode.setCompareOperand("<=");
+		else if(compare.equals("<="))
+			targetCode.setCompareOperand(">=");
+		codeModifyPanel.highlightOperandPanel(operandNumber, Color.orange);
+		codeModifyPanel.setCompareText();
+	}
 }

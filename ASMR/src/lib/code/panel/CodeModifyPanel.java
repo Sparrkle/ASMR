@@ -15,7 +15,7 @@ public class CodeModifyPanel extends JPanel implements MouseListener
 	VariablePanel variablePanel;
 	CodePanel codePanel; 
 	
-	JPanel[] pnOperand;
+	public JPanel[] pnOperand;
 	JLabel[] lblModify;
 	CodeObject targetCode;
 	boolean checkModifyOperand;
@@ -24,12 +24,13 @@ public class CodeModifyPanel extends JPanel implements MouseListener
 	public CodeModifyPanel(CodePanel codePanelInput, VariablePanel variablePanelInput)
 	{
 		System.out.println("Create CodeModifyPanel");
+		
 		this.setOpaque(true);
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 		this.setAlignmentY(Component.CENTER_ALIGNMENT);
 		this.addMouseListener(this);
 		
-		this.setBackground(new Color(51, 153, 255, 50));
+		this.setBackground(new Color(124, 148 ,169));
 		
 		variablePanel = variablePanelInput;
 		codePanel = codePanelInput;
@@ -47,7 +48,8 @@ public class CodeModifyPanel extends JPanel implements MouseListener
 				pnOperand[i-1] = new JPanel();
 				pnOperand[i-1].add(lblModify[i]);
 				pnOperand[i-1].setVisible(false);
-				pnOperand[i-1].setBackground(new Color(164, 184, 203));
+				pnOperand[i-1].setBackground(new Color(164, 142 ,88));
+				pnOperand[i-1].setForeground(Color.white);
 				
 				pnOperand[i-1].addMouseListener(new CodeModifyOperandMouseListener(this, i));
 				this.add(pnOperand[i-1]);
@@ -97,7 +99,6 @@ public class CodeModifyPanel extends JPanel implements MouseListener
 		 * lblModify[2] - 타겟 operand
 		 * lblModify[3] - 라인 operand로 implied 정의함.
 		 */
-		int target = targetCode.getTargetOperand();
 		int dest = targetCode.getDestinationAddr();
 		String comp = targetCode.getCompareOperand();
 		
@@ -117,6 +118,12 @@ public class CodeModifyPanel extends JPanel implements MouseListener
 				pnOperand[i-1].setVisible(true);
 			}
 		}
+	}
+	
+	public void setCompareText()
+	{
+		lblModify[1].setText(targetCode.getCompareOperand());
+		deletePaintGlitch();
 	}
 	
 	public void setTargetText()
@@ -193,7 +200,7 @@ public class CodeModifyPanel extends JPanel implements MouseListener
 	
 	public void changeDefaultOperandButton()
 	{
-		highlightOperandPanel(selectedOperand, new Color(164, 184, 203));
+		highlightOperandPanel(selectedOperand, new Color(164, 142 ,88));
 		if(selectedOperand == 2)
 			highlightVariableButton(Color.WHITE);
 		else if(selectedOperand == 3)

@@ -31,6 +31,36 @@ public class CodeCreateDefaultObject
 		return new CopyFrom(true, vm, 0, availablePointer);
 	}
 	
+	public CodeObject createCopyTo()
+	{
+		return new CopyTo(true, vm, 0, availablePointer);
+	}
+	
+	public CodeObject createInc()
+	{
+		return new Inc(true, vm, 0, availablePointer);
+	}
+	
+	public CodeObject createDec()
+	{
+		return new Dec(true, vm, 0, availablePointer);
+	}
+	
+	public CodeObject createAdd()
+	{
+		return new Add(true, vm, 0, availablePointer);
+	}
+	
+	public CodeObject createSub()
+	{
+		return new Sub(true, vm, 0, availablePointer);
+	}
+	
+	public CodeObject createIfCpu()
+	{
+		return new IfCpu(true, vm, cm, ">=", 0, 1, availablePointer);
+	}
+	
 	public CodeObject createJump()
 	{
 		return new Jump(true, cm, 1);

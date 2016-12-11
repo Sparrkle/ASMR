@@ -2,6 +2,8 @@ package lib.code.listener;
 
 import java.awt.event.MouseEvent;
 
+import lib.code.CodeObject;
+import lib.code.panel.CodeModifyPanel;
 import lib.code.panel.CodePanel;
 
 public class CodeLineMouseListener extends CodeCentreMouseListener
@@ -22,7 +24,10 @@ public class CodeLineMouseListener extends CodeCentreMouseListener
 				{
 					int selectedValue = Integer.parseInt(codePanel.listLine.getSelectedValue());
 					if(codePanel.listLine.getModel().getSize()-1 >= selectedValue)
-						codePanel.modifyPanel.updateDestinationCode(selectedValue);
+					{
+						if(selectedValue != codePanel.listMain.getSelectedIndex()+1)
+							codePanel.modifyPanel.updateDestinationCode(selectedValue);
+					}
 				}
 				codePanel.modifyPanel.changeDefaultOperandButton();
 			}

@@ -1,7 +1,9 @@
 package stage;
 
+import java.util.List;
+
 public interface StageInterface
 {
-	public abstract int[] getOutputToInput(int[] input);
-	public abstract void setInput();
+	public abstract List<String> getOutputToInput(List<String> input);
+	public abstract List<String> setInput (List<String> input);
 }

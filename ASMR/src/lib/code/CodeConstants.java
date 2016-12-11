@@ -11,6 +11,6 @@ public interface CodeConstants
 	public static final int CODE_DEC = 1<<5;
 	public static final int CODE_ADD = 1<<6;
 	public static final int CODE_SUB = 1<<7;
-	public static final int CODE_IF = 1<<8;
+	public static final int CODE_IFCPU = 1<<8;
 	public static final int CODE_JUMP = 1<<9;
 }

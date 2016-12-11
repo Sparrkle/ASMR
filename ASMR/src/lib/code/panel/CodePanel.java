@@ -5,6 +5,7 @@ import java.awt.datatransfer.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.swing.event.*;
 
 import lib.code.CodeManager;
@@ -20,17 +21,18 @@ public class CodePanel extends JPanel implements AdjustmentListener, MouseListen
 	public CodeModifyPanel modifyPanel;
 	public VariablePanel variablePanel;
 	private boolean checkModify = false;
-	CodeSourcePanel codeSourcePanel;
+	public CodeSourcePanel codeSourcePanel;
+	public CodeDebugPanel pnDebug;
 	JLayeredPane pnHiddenMain;
-	JScrollPane spMain;
+	public JScrollPane spMain;
 	JScrollPane spLine;
-	DefaultListModel<CodeObject> listModelMain;
+	public DefaultListModel<CodeObject> listModelMain;
 	DefaultListModel<String> listModelLine;
-	JList<CodeObject> listMain;
+	public JList<CodeObject> listMain;
 	public JList<String> listLine;
 	JList<CodeObject> listCode;
 	CodeListHandler lh;
-	CodeManager cm;
+	public CodeManager cm;
 	
 	public CodePanel(int x, int y, int w, int h, VariablePanel variablePanelInput)
 	{
@@ -38,7 +40,6 @@ public class CodePanel extends JPanel implements AdjustmentListener, MouseListen
 		this.setBounds(x, y, w, h);
 		this.setLayout(null);
 		this.setBackground(Color.BLACK);
-		cm = new CodeManager(listMain);
 		
 		variablePanel = variablePanelInput;
 		
@@ -48,14 +49,12 @@ public class CodePanel extends JPanel implements AdjustmentListener, MouseListen
 		pnHiddenMain.setLayout(null);
 		this.add(pnHiddenMain);
 		
-		CodeDebugPanel pnDebug = new CodeDebugPanel(cm);
-		this.add(pnDebug);
-		
 		spMain = new JScrollPane();
 		spMain.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		spMain.getVerticalScrollBar().setPreferredSize(new Dimension(10, 0));
+		spMain.getVerticalScrollBar().setPreferredSize(new Dimension(15, 0));
 		spMain.setBounds(0, 0, w-20, h-35);
-		spMain.setBorder(null);
+		//spMain.setBorder(null);
+		spMain.setBorder(BorderFactory.createMatteBorder(3, 0, 3, 3, Color.white));
 		spMain.getVerticalScrollBar().addAdjustmentListener(this);
 		spMain.getVerticalScrollBar().addMouseListener(new MouseAdapter()
 		{
@@ -76,6 +75,7 @@ public class CodePanel extends JPanel implements AdjustmentListener, MouseListen
 		spLine.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		spLine.setBounds(0, 0, 20, h-35);
 		spLine.setBorder(null);
+		spLine.setBorder(BorderFactory.createMatteBorder(3, 0, 3, 0, Color.white));
 		spLine.setOpaque(false);
 		this.add(spLine);
 		
@@ -83,6 +83,8 @@ public class CodePanel extends JPanel implements AdjustmentListener, MouseListen
 		listMain.setCellRenderer(new CodeRenderer());
 		listMain.setDropMode(DropMode.INSERT);
 		listMain.setDragEnabled(true);
+		listMain.setBackground(Color.black);
+		listMain.setForeground(Color.white);
 		listMain.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 13));
 		listMain.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
@@ -99,8 +101,8 @@ public class CodePanel extends JPanel implements AdjustmentListener, MouseListen
 		listLine.setDragEnabled(true);
 		listLine.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 13));
 		listLine.setFixedCellHeight(30);
-		listLine.setBackground(new Color(226, 226, 226));
-		listLine.setForeground(Color.BLACK);
+		listLine.setBackground(new Color(232, 232, 232));
+		listLine.setForeground(Color.white);
 		listLine.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listLine.addMouseListener(new CodeLineMouseListener(this));
 		listLine.setCellRenderer(new DefaultListCellRenderer()
@@ -140,6 +142,11 @@ public class CodePanel extends JPanel implements AdjustmentListener, MouseListen
 		modifyPanel = new CodeModifyPanel(this, variablePanel);
 		modifyPanel.setVisible(false);
 		pnHiddenMain.add(modifyPanel, JLayeredPane.POPUP_LAYER);
+		
+		cm = new CodeManager(listMain, variablePanel, this);
+		
+		pnDebug = new CodeDebugPanel(cm, this);
+		this.add(pnDebug);
 	}
 	
 	public boolean getCheckModify()

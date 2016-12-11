@@ -16,7 +16,7 @@ public class VariableManager
 	String[] arrVar;
 	String cpu;
 	VariablePanel vp;
-	
+
 	public VariableManager(int arrAmount, VariablePanel vpInput)
 	{
 		vp = vpInput;
@@ -26,34 +26,45 @@ public class VariableManager
 		cpu = new String();
 	}
 	
-	public List<String> getArrInput()
+	public void historyBackVariables(List<String> arrInputVal, List<String> arrOutputVal, String[] arrVarVal, String cpuVal)
 	{
-		return arrInput;
+		arrInput = arrInputVal;
+		arrOutput = arrOutputVal;
+		arrVar = arrVarVal;
+		cpu = cpuVal;
 	}
 	
-	public List<String> getArrOutput()
+	public void resetVariables()
 	{
-		return arrOutput;
+		arrInput.removeAll(arrInput);
+		arrOutput.removeAll(arrOutput);
+		cpu = null;
 	}
 	
-	public void reprintInput()
+	public List<String> getCopyedArrInput()
 	{
-		String temp = "";
-		for(int i=0; i<arrInput.size(); i++)
-		{
-			temp += (String) arrInput.get(i);
-		}
-		vp.lblInput.setText(temp);
+		List<String> temp = new ArrayList<String>();
+		temp.addAll(arrInput);
+		return temp;
 	}
 	
-	public void reprintOutput()
+	public List<String> getCopyedArrOutput()
 	{
-		String temp = "";
-		for(int i=0; i<arrInput.size(); i++)
-		{
-			temp += (String) arrOutput.get(i);
-		}
-		vp.lblOutput.setText(temp);
+		List<String> temp = new ArrayList<String>();
+		temp.addAll(arrOutput);
+		return temp;
+	}
+	
+	public String[] getArrVar()
+	{
+		String[] temp = new String[arrVar.length];
+		temp = arrVar.clone();
+		return temp;
+	}
+	
+	public String getCpuHistory()
+	{
+		return cpu;
 	}
 	
 	public String withdrawInput() throws InvalidArraySizeException
@@ -63,7 +74,6 @@ public class VariableManager
 			String temp;
 			temp = (String) arrInput.get(0);
 			arrInput.remove(0);
-			reprintInput();
 			return temp;
 		}
 		else
@@ -72,8 +82,7 @@ public class VariableManager
 	
 	public List<String> depositOutput(String input)
 	{
-		arrOutput.add(0, input);
-		reprintOutput();
+		arrOutput.add(input);
 		return arrOutput;
 	}
 	
@@ -81,13 +90,13 @@ public class VariableManager
 	{
 		if(num >= 0 && num < arrVar.length)
 		{
-			if(arrVar[num] != null)
+			if(arrVar[num] != null && !arrVar[num].equals(""))
 				return arrVar[num];
 			else
-				throw new InvalidValueException("getVariable - invalid value to arrVar : " + num);
+				throw new InvalidValueException("getVariable - invalid value to arrVar : " + num, Integer.toString(num));
 		}
 		else
-			throw new InvalidArraySizeException("getVariable - invalid get arrVar : " + num);
+			throw new InvalidArraySizeException("getVariable - invalid get arrVar : " + num, Integer.toString(num));
 	}
 	
 	public String getVariableAtPointer(int num) throws InvalidArraySizeException, InvalidValueException, NumberFormatException
@@ -100,11 +109,11 @@ public class VariableManager
 		}
 		catch(InvalidArraySizeException e)
 		{
-			throw new InvalidArraySizeException(e.getMessage());
+			throw e;
 		}
 		catch(InvalidValueException e)
 		{
-			throw new InvalidValueException(e.getMessage());
+			throw e;
 		}
 		catch(NumberFormatException e)
 		{
@@ -117,15 +126,36 @@ public class VariableManager
 		if(num >= 0 && num < arrVar.length)
 		{
 			arrVar[num] = input;
-			vp.btnVariable[num].setText(arrVar[num]);
 		}
 		else
-			throw new InvalidArraySizeException("setVariable - invalid set arrVar : " + num);
+			throw new InvalidArraySizeException("setVariable - invalid set arrVar : " + num, Integer.toString(num));
+	}
+	
+	public void setVariableAtPointer(String input, int num) throws InvalidArraySizeException, InvalidValueException, NumberFormatException
+	{
+		String targetAddress = "";
+		try
+		{
+			targetAddress = getVariable(num);
+			setVariable(input, Integer.parseInt(targetAddress));
+		}
+		catch(InvalidArraySizeException e)
+		{
+			throw e;
+		}
+		catch(InvalidValueException e)
+		{
+			throw e;
+		}
+		catch(NumberFormatException e)
+		{
+			throw new NumberFormatException("setVariableAtPointer - invalid operand : " + targetAddress);
+		}
 	}
 	
 	public String getCpu() throws InvalidValueException
 	{
-		if(cpu != null)
+		if(cpu != null && !cpu.equals(""))
 			return cpu;
 		else
 			throw new InvalidValueException("getCpu - invalid value to cpu");
@@ -134,6 +164,5 @@ public class VariableManager
 	public void setCpu(String input)
 	{
 		cpu = input;
-		vp.btnCpu.setText(cpu);
 	}
 }

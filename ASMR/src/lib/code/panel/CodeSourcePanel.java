@@ -1,6 +1,9 @@
 package lib.code.panel;
 
+import java.awt.Color;
+
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 import lib.code.CodeConstants;
 import lib.code.CodeCreateDefaultObject;
@@ -40,15 +43,20 @@ public class CodeSourcePanel extends JPanel implements CodeConstants
 		
 		System.out.println("Create CodeSourcePanel");
 		this.setBounds(x, y, w, h);
+		this.setOpaque(true);
+		this.setBackground(Color.black);
+		this.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 0, Color.white));
 		this.setLayout(null);
 		
 		listCode = new JList<CodeObject>();
-		listCode.setBounds(0, 0, w, h);
+		listCode.setBounds(3, 3, w-3, h-6);
 		listCode.setCellRenderer(new CodeSourceRenderer());
 		listCode.setDropMode(DropMode.USE_SELECTION);
 		listCode.setDragEnabled(true);
 		listCode.setFixedCellHeight(heightSize);
 		listCode.setTransferHandler(lh);
+		listCode.setBackground(Color.black);
+		listCode.setForeground(Color.white);
 		listCode.addMouseListener(new CodeCentreMouseListener(codePanel));
 		this.add(listCode);
 		
@@ -69,8 +77,20 @@ public class CodeSourcePanel extends JPanel implements CodeConstants
 			listModelCode.addElement(objCreateCode.createScanData());
 		if(isDataAvailableCommand(availableCommand, CODE_PRINTDATA))
 			listModelCode.addElement(objCreateCode.createPrintData());
+		if(isDataAvailableCommand(availableCommand, CODE_COPYTO))
+			listModelCode.addElement(objCreateCode.createCopyTo());
 		if(isDataAvailableCommand(availableCommand, CODE_COPYFROM))
 			listModelCode.addElement(objCreateCode.createCopyFrom());
+		if(isDataAvailableCommand(availableCommand, CODE_INC))
+			listModelCode.addElement(objCreateCode.createInc());
+		if(isDataAvailableCommand(availableCommand, CODE_DEC))
+			listModelCode.addElement(objCreateCode.createDec());
+		if(isDataAvailableCommand(availableCommand, CODE_ADD))
+			listModelCode.addElement(objCreateCode.createAdd());
+		if(isDataAvailableCommand(availableCommand, CODE_SUB))
+			listModelCode.addElement(objCreateCode.createSub());
+		if(isDataAvailableCommand(availableCommand, CODE_IFCPU))
+			listModelCode.addElement(objCreateCode.createIfCpu());
 		if(isDataAvailableCommand(availableCommand, CODE_JUMP))
 			listModelCode.addElement(objCreateCode.createJump());
 	}

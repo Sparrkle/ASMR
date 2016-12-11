@@ -1,6 +1,7 @@
 package stage;
 
 import java.lang.reflect.*;
+import java.util.*;
 
 /*
  * Stage의 동적 함수 실행을 위한 클래스.
@@ -28,6 +29,8 @@ public class StageLib
 	Method getAvCoMethod = null;
 	Method getAvPoMethod = null;
 	Method getOutMethod = null;
+	Method getSetInputMethod = null;
+	Method getImpliedArrayMethod = null;
 	
 	public StageLib(int stageNum)
 	{
@@ -40,7 +43,9 @@ public class StageLib
 			getArrMethod = obj.getClass().getMethod("getArrayAmount");
 			getAvCoMethod = obj.getClass().getMethod("getAvailableCommand");
 			getAvPoMethod = obj.getClass().getMethod("getAvailablePointer");
-			getOutMethod = obj.getClass().getMethod("getOutputToInput", new Class[]{int[].class});
+			getOutMethod = obj.getClass().getMethod("getOutputToInput", List.class);
+			getSetInputMethod = obj.getClass().getMethod("setInput", List.class);
+			getImpliedArrayMethod = obj.getClass().getMethod("impliedArraySet");
 			
 			System.out.println("Success load stage" + stageNum);
 		}
@@ -158,13 +163,13 @@ public class StageLib
 		throw new Exception("getAvPoMethod is null");
 	}
 	
-	public int[] getOutputToInput(int[] input) throws Exception
+	public List<String> getOutputToInput(List<String> input) throws Exception
 	{
 		if(getOutMethod != null)
 		{
 			try
 			{
-				return (int[]) getOutMethod.invoke(obj, input);
+				return (List<String>) getOutMethod.invoke(obj, input);
 			}
 			catch(IllegalAccessException iae)
 			{
@@ -180,5 +185,53 @@ public class StageLib
 			}
 		}
 		throw new Exception("getOutMethod is null");
+	}
+	
+	public List<String> setInput(List<String> input) throws Exception
+	{
+		if(getSetInputMethod != null)
+		{
+			try
+			{
+				return (List<String>) getSetInputMethod.invoke(obj, input);
+			}
+			catch(IllegalAccessException iae)
+			{
+				System.err.println("** cannot access method : " + iae.getMessage());
+			}
+			catch(IllegalArgumentException iae)
+			{
+				System.err.println("** argument error to method : " + iae.getMessage());
+			}
+			catch(InvocationTargetException ite)
+			{
+				System.err.println("** invocation target to method : " + ite.getMessage());
+			}
+		}
+		throw new Exception("getSetInputMethod is null");
+	}
+	
+	public String[] impliedArraySet() throws Exception
+	{
+		if(getImpliedArrayMethod != null)
+		{
+			try
+			{
+				return (String[]) getImpliedArrayMethod.invoke(obj);
+			}
+			catch(IllegalAccessException iae)
+			{
+				System.err.println("** cannot access method : " + iae.getMessage());
+			}
+			catch(IllegalArgumentException iae)
+			{
+				System.err.println("** argument error to method : " + iae.getMessage());
+			}
+			catch(InvocationTargetException ite)
+			{
+				System.err.println("** invocation target to method : " + ite.getMessage());
+			}
+		}
+		throw new Exception("getImpliedArrayMethod is null");
 	}
 }

@@ -84,15 +84,15 @@ public class CopyFrom extends CodeObject
 		}
 		catch(InvalidArraySizeException iase)
 		{
-			throw iase;
+			throw new InvalidArraySizeException("오류 ! " + iase.getExtra() + "번 변수는 존재하지 않습니다.");
 		}
 		catch(InvalidValueException ive)
 		{
-			throw ive;
+			throw new InvalidValueException("오류 ! " + ive.getExtra() + "번 변수에는 값이 존재하지 않습니다.");
 		}
 		catch(NumberFormatException nfe)
 		{
-			throw nfe;
+			throw new NumberFormatException("오류 ! 주소 값은 문자를 참고 하실 수 없습니다.");
 		}
 	}
 }
