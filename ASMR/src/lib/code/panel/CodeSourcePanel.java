@@ -3,7 +3,6 @@ package lib.code.panel;
 import java.awt.Color;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 
 import lib.code.CodeConstants;
 import lib.code.CodeCreateDefaultObject;

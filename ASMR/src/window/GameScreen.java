@@ -4,7 +4,6 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import lib.code.panel.CodePanel;
 import lib.variable.VariablePanel;
 import stage.StageLib;
 

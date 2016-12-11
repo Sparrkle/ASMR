@@ -5,12 +5,9 @@ import java.awt.datatransfer.*;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
-import javax.swing.event.*;
 
 import lib.code.CodeManager;
 import lib.code.CodeObject;
-import lib.code.listener.CodeCentreMouseListener;
 import lib.code.listener.CodeLineMouseListener;
 import lib.code.renderer.CodeRenderer;
 import lib.variable.VariableManager;

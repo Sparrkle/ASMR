@@ -29,7 +29,7 @@ public class ASMRMain extends JFrame
 	}
 	public static void main(String[] args)
 	{
-		ASMRMain frame = new ASMRMain("ASMR");
+		ASMRMain frame = new ASMRMain("ASM");
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//frame.setBounds(100, 100, 720, 480);
