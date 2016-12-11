@@ -170,7 +170,7 @@ public class ModifyScreen extends JPanel implements ActionListener, ItemListener
 		if(ae.getActionCommand() == "modify"){
 			 
 			   db_id = currentID;//비교용  
-			   db_passwd = passwd.getText();  
+			   db_passwd = passwd.getText();
 			   db_name = tfname.getText();     
 			   db_address = tfaddress.getText();
 			   gender = Gender;

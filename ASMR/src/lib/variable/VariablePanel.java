@@ -307,7 +307,9 @@ public class VariablePanel extends JLayeredPane implements ActionListener
 		pnVictory.setOpaque(false);
 		this.add(pnVictory, JLayeredPane.POPUP_LAYER);
 		
-		ImageIcon imgClear = new ImageIcon("src/img/clear.gif"); 
+		ImageIcon imgClear = new ImageIcon("src/img/clear.gif");
+		imgClear.getImage().flush();
+		
 		JLabel lblImgClear;
 		lblImgClear = new JLabel();
 		lblImgClear.setBounds(0, 0, 720, 480);
